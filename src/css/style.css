@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+}
+
+invalid[class] {
+    display: none;
+}
+
+.app-container {
+    border: black 2px solid;
+    max-width: 800px;
+    min-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.app-wall {
+    min-height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-form  {
+    width: 80%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.app-form-input {
+    width: 100%;
+    height: 40px;
+    margin: 0;
+}
+
+.post-container {
+    margin-top: 10px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 90%;
+    padding: 5px;
+}
+
+.post-time {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+. post-content {
+    margin-top: 10px;
+}
+
+.post-cordinate {
+    margin-top: 10px;
+}
