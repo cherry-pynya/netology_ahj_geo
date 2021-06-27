@@ -3,6 +3,7 @@
 import moment from 'moment';
 import getLocation from './location';
 import postFactory from './postfactory';
+import validate from './validate';
 
 moment.locale('ru');
 
@@ -65,7 +66,7 @@ export default class Timeline {
 
   coordsSubmit(e, app) {
     e.preventDefault();
-    if (app.validate(app.coordsForm.querySelector('.coords-form-input').value)) {
+    if (validate(app.coordsForm.querySelector('.coords-form-input').value)) {
       const time = `${moment().format('L')} ${moment().format('LTS')}`;
       const obj = {
         content: this.form.querySelector('.app-form-input').value,
@@ -90,10 +91,5 @@ export default class Timeline {
     this.coordsForm.classList.toggle('invalid');
     this.form.querySelector('.app-form-input').value = '';
     this.coordsForm.querySelector('.coords-form-input').value = '';
-  }
-
-  validate(str) {
-    const re = /^([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
-    return re.test(str);
   }
 }
