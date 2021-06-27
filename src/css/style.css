@@ -2,7 +2,7 @@ body {
     margin: 0;
 }
 
-invalid[class] {
+.invalid[class] {
     display: none;
 }
 
@@ -59,10 +59,53 @@ invalid[class] {
     width: 100%;
 }
 
-. post-content {
+.post-content {
     margin-top: 10px;
 }
 
 .post-cordinate {
     margin-top: 10px;
+}
+
+.modal {
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: rgba(0, 0, 0, 0.75);
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.coords-form {
+    background-color: aliceblue;
+    width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+h2 {
+    margin: 0;
+}
+
+.coords-form-input {
+    margin-top: 10px;
+    width: 80%;
+    height: 20px;
+}
+
+.coords-form-btn-cnt {
+    margin-top: 10px;
+}
+
+.coords-form-btn {
+    height: 20px;
 }

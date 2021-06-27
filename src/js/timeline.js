@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 import moment from 'moment';
 import getLocation from './location';
@@ -15,9 +16,16 @@ export default class Timeline {
 
     this.timeline = this.element.querySelector('.app-wall');
     this.form = this.element.querySelector('.app-form');
+    this.coordsForm = document.querySelector('.coords-form');
 
     this.form.addEventListener('submit', (e) => {
       this.onSubmit(e, this);
+    });
+    this.coordsForm.addEventListener('submit', (e) => {
+      this.coordsSubmit(e, this);
+    });
+    this.coordsForm.addEventListener('reset', (e) => {
+      this.cancelCoords(e);
     });
   }
 
@@ -34,7 +42,8 @@ export default class Timeline {
       app.save(obj);
       this.form.querySelector('.app-form-input').value = '';
     }, (reject) => {
-      console.log(reject);
+      document.querySelector('.modal').classList.toggle('invalid');
+      this.coordsForm.classList.toggle('invalid');
     });
   }
 
@@ -52,5 +61,39 @@ export default class Timeline {
         this.timeline.insertAdjacentHTML('beforeend', postFactory(el));
       });
     }
+  }
+
+  coordsSubmit(e, app) {
+    e.preventDefault();
+    if (app.validate(app.coordsForm.querySelector('.coords-form-input').value)) {
+      const time = `${moment().format('L')} ${moment().format('LTS')}`;
+      const obj = {
+        content: this.form.querySelector('.app-form-input').value,
+        coords: `[${this.coordsForm.querySelector('.coords-form-input').value}]`,
+        date: time,
+      };
+      app.timeline.insertAdjacentHTML('beforeend', postFactory(obj));
+      app.save(obj);
+      document.querySelector('.modal').classList.toggle('invalid');
+      this.coordsForm.classList.toggle('invalid');
+      this.form.querySelector('.app-form-input').value = '';
+      this.coordsForm.querySelector('.coords-form-input').value = '';
+    } else {
+      alert('Введите координаты в формате: Х.ХХХ, Х.ХХХ');
+      this.coordsForm.querySelector('.coords-form-input').value = '';
+    }
+  }
+
+  cancelCoords(e) {
+    e.preventDefault();
+    document.querySelector('.modal').classList.toggle('invalid');
+    this.coordsForm.classList.toggle('invalid');
+    this.form.querySelector('.app-form-input').value = '';
+    this.coordsForm.querySelector('.coords-form-input').value = '';
+  }
+
+  validate(str) {
+    const re = /^([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
+    return re.test(str);
   }
 }
